@@ -15,4 +15,4 @@
    webView.setWebChromeClient(new WebChromeClient());
 ```
 展示效果如下图所示：  
-![image](https://github.com/tianyalu/AndroidHtmlDemo/bolb/master/screenshot/show.gif)
+![image](https://github.com/tianyalu/AndroidHtmlDemo/blob/master/screenshot/show.gif)
