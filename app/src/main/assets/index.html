@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JS和Android交互</title>
+
+    <!-- 样式 -->
+    <style>
+            button{
+                height:36px;
+                width:100%;
+                background:#98bf21;
+            }
+
+    </style>
+</head>
+
+<body>
+    <p>JS和Android交互</p>
+    Text:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="targetText" placeholder="请输入网页发送给APP的信息" style="height:28px;"/>
+    <br/>
+    <br/>
+    <button onclick="sendInfoToJava()">JS调用App方法（带参数）</button>
+    <br/>
+    <br/>
+    <button onclick="invokeAppMethod()">JS调用App方法（不带参数）</button>
+
+    <script>
+
+        //JS调用Android（发送消息到Android客户端）
+        function sendInfoToJava(){
+            //调用Android程序中的方法，并传递参数
+            var text = document.getElementById("targetText").value;
+            //alert("网页输入框的数据：" + text);
+            window.AndroidWebView.showInfoFromJs(text);
+        }
+
+        //JS直接调用Android客户端中的showInfoFromJs方法
+        function invokeAppMethod(){
+            window.AndroidWebView.showInfoFromJs();
+        }
+
+        //Android调用JS，带参数
+        function showInfoFromApp2(msg){
+            var textInput = document.getElementById("targetText");
+            textInput.value = msg;
+            alert("来自App的信息：" + msg);
+        }
+
+        //Android调用JS，不传递信息
+        function showInfoFromApp(){
+            alert("通过App调用JS");
+        }
+    </script>
+</body>
+</html>
