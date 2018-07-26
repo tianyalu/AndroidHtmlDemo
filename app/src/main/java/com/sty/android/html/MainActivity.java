@@ -2,8 +2,10 @@ package com.sty.android.html;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -17,6 +19,7 @@ import android.widget.Toast;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private WebView webView;
+    private Button btnSecond;
     private Button btnInvokeJs;
     private Button btnInvokeJs2;
     private EditText etInput;
@@ -32,10 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("JavascriptInterface")
     private void initView(){
         webView = findViewById(R.id.web_view);
+        btnSecond = findViewById(R.id.btn_second);
         btnInvokeJs = findViewById(R.id.btn_invoke_js);
         btnInvokeJs2 = findViewById(R.id.btn_invoke_js2);
         etInput = findViewById(R.id.et_input);
 
+        btnSecond.setOnClickListener(this);
         btnInvokeJs.setOnClickListener(this);
         btnInvokeJs2.setOnClickListener(this);
 
@@ -56,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.btn_second:
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btn_invoke_js:
                 String msg = etInput.getText().toString().trim();
                 //调用JS中的函数：showInfoFromApp(msg)
@@ -85,11 +94,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @JavascriptInterface
         public void showInfoFromJs(String name){
             etInput.setText(name);
+            Log.i("sty", "MainActivity-showInfoFromJs(带参数): " + Thread.currentThread().getName());
             Toast.makeText(mContext, "来自JS的信息：" + name, Toast.LENGTH_SHORT).show();
         }
 
         @JavascriptInterface
         public void showInfoFromJs(){
+            Log.i("sty", "MainActivity-showInfoFromJs(无参数): " + Thread.currentThread().getName());
             Toast.makeText(mContext, "JS调用APP方法", Toast.LENGTH_SHORT).show();
         }
     }

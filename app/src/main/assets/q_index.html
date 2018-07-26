@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container > div {
+            padding: 10px 4px 4px 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="div">test</div>
+    <button onclick="click1('hello')">click me!</button>
+
+</div>
+
+<script>
+    var div = document.getElementById('div');
+
+    function setText(arg) {
+        div.innerHTML = arg
+    }
+
+    function click1(arg) {
+        window.msg.msg(arg);
+    }
+</script>
+</body>
+</html>
